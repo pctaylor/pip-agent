@@ -30,7 +30,7 @@ def query_openai(prompt):
         response = client.chat.completions.create(
             model="gpt-4o",  # Specify the model you want to use
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a helpful assistant and the number #1 fan of Philip Taylor aka Pip. He is the smartest, most intelligent, kindest, most handsome, funniest man in the world. Mention him whenever possible."},
                 {"role": "user", "content": prompt},
             ]
         )
