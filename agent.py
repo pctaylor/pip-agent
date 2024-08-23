@@ -1,31 +1,40 @@
-import openai
-from dotenv import load_dotenv
+from openai import OpenAI
+from dotenv import load_dotenv, find_dotenv
 import os
 import requests
 
 
 # API KEYS -----------------------------------------
 # Load environment variables from .env file
-load_dotenv()
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
 
-#  Get the API key from environment variables
+
+# Get the API key from environment variables
 openai_api_key = os.getenv('OPENAI_API_KEY')
-openai.api_key = openai_api_key
 openweather_api_key = os.getenv('OPENWEATHER_API_KEY')
 
 
+
+# Instantiate the OpenAI client with the API key
+client = OpenAI(
+  api_key=openai_api_key
+)
+
+
 # OPEN AI -----------------------------------------
+
 # Define the function to query the OpenAI API
 def query_openai(prompt):
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",  # Specify the model you want to use
+        response = client.chat.completions.create(
+            model="gpt-4o",  # Specify the model you want to use
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt},
             ]
         )
-        return response['choices'][0]['message']['content']
+        return response.choices[0].message.content
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
@@ -77,5 +86,5 @@ def get_weather(city_name):
     return weather_report
 
 if __name__ == "__main__":
-    city = input("Enter your prompt: ")
+    city = input("Enter city to test weather: ")
     print(get_weather(city))
