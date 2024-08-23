@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from agent import query_openai, get_weather
 
 app = Flask(__name__)
@@ -16,6 +16,13 @@ def ask_agent():
         response = query_openai(prompt)
     
     return jsonify({"response": response})
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

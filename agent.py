@@ -11,12 +11,14 @@ openai_api_key = os.getenv('OPENAI_API_KEY')
 
 def query_openai(prompt):
     openai.api_key = openai_api_key
-    response = openai.Completion.create(
-        engine="gpt-4o",
-        prompt=prompt,
-        max_tokens=150
+    response = openai.ChatCompletion.create(
+        model="gpt-4o",  
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt},
+        ]
     )
-    return response.choices[0].text.strip()
+    return response['choices'][0]['message']['content']
 
 
 # Get the API key from environment variables
