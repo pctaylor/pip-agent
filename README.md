@@ -17,7 +17,7 @@ This project is designed to create a Language Learning Model (LLM)-based agent c
     - **[*TODO*] Human-check** don't let bots use the site
 - **Hosting:** The application is deployed on a Digital Ocean droplet with proper configuration for production, including SSL via Nginx.
     - **Secret management** secrets are stored in `.env` file and ignored by git.
-    - **[*TODO*] Deployment** is continuous, updating the page after each push to the main branch using Github Actions.
+    - **[*IN-PROGRESS*] Deployment** is continuous, updating the page after each push to the main branch using Github Actions.
     - **[*TODO*] Monitoring** basic logging and monitoring.
 - **Security:** Basic security measures have been implemented, including HTTPS and input validation.
 
