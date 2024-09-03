@@ -75,16 +75,7 @@ This project is designed to create a Language Learning Model (LLM)-based agent c
   - Verified the application is running correctly via the domain or IP address.
   - Confirmed SSL is working and the application is secure.
 
-## Next Steps
-- Implement further security measures, such as advanced authentication and input validation.
-- Set up continuous integration/deployment (CI/CD) to automate the deployment process.
-- Expand the agent's capabilities with additional tools and functionalities.
-
 ## Notes
 - **Droplet Configuration:** The droplet runs Ubuntu 22.04, with Nginx as the web server and Gunicorn as the WSGI server.
 - **Environment Variables:** Store sensitive information like API keys in environment variables (`.env` file recommended).
 - **Logs and Monitoring:** Use `journalctl` for logs related to the Gunicorn service and consider setting up additional monitoring tools.
-
----
-
-This summary should provide a clear and concise reference for future work on the project.
