@@ -20,7 +20,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
 
-    - name: Deploy code to Digital Ocean Droplet
+    - name: Deploy code to Digital Ocean Droplet. Please god.
       run: |
         ssh root@${{ secrets.DROPLET_IP }} << 'EOF'
         sudo apt update
