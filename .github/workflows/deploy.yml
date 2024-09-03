@@ -24,23 +24,10 @@ jobs:
       run: |
         ssh root@${{ secrets.DROPLET_IP }} << 'EOF'
         sudo apt update
-        sudo apt install -y python3 python3-venv python3-pip
+        sudo apt install -y python3 python3-venv python3-pip pipx
+        export PATH=$PATH:/root/.local/bin
         cd /var/www/pip-agent
         git pull origin main
-        # Ensure virtual environment exists
-        if [ ! -d "venv" ]; then
-            python3 -m venv venv
-        fi
-        
-        # Activate the virtual environment
-        source venv/bin/activate
-
-        # Upgrade pip to the latest version
-        pip install --upgrade pip
-
-        # Install dependencies within the virtual environment
-        pip install -r requirements.txt
-
-        # Restart the Gunicorn service
+        pipx install --force --pip-args='--no-cache-dir' -r requirements.txt
         systemctl restart pip-agent
         EOF
