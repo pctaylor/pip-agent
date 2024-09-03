@@ -23,6 +23,8 @@ jobs:
     - name: Deploy code to Digital Ocean Droplet
       run: |
         ssh root@${{ secrets.DROPLET_IP }} << 'EOF'
+        sudo apt update
+        sudo apt install -y python3 python3-venv python3-pip
         cd /var/www/pip-agent
         git pull origin main
         source venv/bin/activate
