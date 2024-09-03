@@ -24,11 +24,10 @@ body {
 
 h1 {
     font-family: 'Caveat', cursive;
-    font-size: 4em;
+    font-size: 4.5em;
     margin: 0 0 20px;
     color: var(--accent-color);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    transform: rotate(-2deg);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 #app {
@@ -45,7 +44,6 @@ h1 {
     margin: 20px auto;
     position: relative;
     overflow: hidden;
-    transform: rotate(1deg);
 }
 
 #app::before {
@@ -164,18 +162,8 @@ footer {
     100% { transform: scale(1); }
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
 #pip-image.thinking {
     animation: thinking 1s infinite;
-}
-
-#pip-image.pulse {
-    animation: pulse 0.5s;
 }
 
 @media (max-width: 600px) {
