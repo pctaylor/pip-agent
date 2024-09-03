@@ -1,23 +1,31 @@
-name: Deploy pip-agent to DigitalOcean Droplet
+name: Deploy pip-agent to Digital Ocean
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main  # Trigger deployment on push to the main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Deploy to Droplet
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd /var/www/pip-agent
-            git pull origin main
-            source venv/bin/activate
-            pip install -r requirements.txt
-            sudo systemctl restart pip-agent.service
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DROPLET_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
+
+    - name: Deploy code to Digital Ocean Droplet
+      run: |
+        ssh root@${{ secrets.DROPLET_IP }} << 'EOF'
+        cd /var/www/pip-agent
+        git pull origin main
+        source venv/bin/activate
+        pip install -r requirements.txt
+        systemctl restart pip-agent
+        EOF
