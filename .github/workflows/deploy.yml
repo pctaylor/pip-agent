@@ -27,15 +27,13 @@ jobs:
         sudo apt update
         sudo apt install -y python3 python3-venv python3-pip
         cd /var/www/pip-agent
+        if [ $? -ne 0 ]; then
+          echo "Directory /var/www/pip-agent does not exist"
+          exit 1
+        fi
         git fetch origin main
         git reset --hard origin/main  # Force reset to discard local changes
-        python3 -m venv venv  # Create a new virtual environment
-        echo "Virtual environment created"
-        ls -la  # List the contents of the current directory for debugging
-        ls -la venv  # List the contents of the venv directory for debugging
-        ls -la venv/bin  # List the contents of the venv/bin directory for debugging
         source venv/bin/activate
-        which python  # Verify the Python executable path
         pip install --no-cache-dir -r requirements.txt
         systemctl restart pip-agent
         EOF
