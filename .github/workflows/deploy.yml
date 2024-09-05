@@ -30,6 +30,9 @@ jobs:
         git fetch origin main
         git reset --hard origin/main  # Force reset to discard local changes
         python3 -m venv venv  # Create a new virtual environment
+        echo "Virtual environment created"
+        ls -la  # List the contents of the current directory for debugging
+        ls -la venv  # List the contents of the venv directory for debugging
         ls -la venv/bin  # List the contents of the venv/bin directory for debugging
         source venv/bin/activate
         which python  # Verify the Python executable path
