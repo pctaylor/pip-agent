@@ -35,4 +35,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const pipImage = document.getElementById('pip-image');
     pipImage.addEventListener('mouseover', () => pipImage.classList.add('pulse'));
     pipImage.addEventListener('mouseout', () => pipImage.classList.remove('pulse'));
+
+    // Human check logic
+    const humanCheckOverlay = document.getElementById('human-check-overlay');
+    const humanCheckYes = document.getElementById('human-check-yes');
+    const humanCheckNo = document.getElementById('human-check-no');
+
+    humanCheckYes.addEventListener('click', () => {
+        humanCheckOverlay.style.display = 'none';
+    });
+
+    humanCheckNo.addEventListener('click', () => {
+        document.body.innerHTML = '<h1>Humans only</h1>';
+    });
 });
