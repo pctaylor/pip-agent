@@ -29,7 +29,7 @@ jobs:
         cd /var/www/pip-agent
         git fetch origin main
         git reset --hard origin/main  # Force reset to discard local changes
-        python3 -m venv venv
+        python3 -m venv venv  # Create a new virtual environment
         source venv/bin/activate
         pip install --no-cache-dir -r requirements.txt
         systemctl restart pip-agent
