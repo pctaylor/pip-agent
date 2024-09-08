@@ -28,6 +28,9 @@ jobs:
         export PATH=$PATH:/root/.local/bin
         cd /var/www/pip-agent
         git pull origin main
-        pipx install --force --pip-args='--no-cache-dir' -r requirements.txt
+        rm -rf venv
+        python3 -m venv venv
+        source venv/bin/activate
+        pip install --no-cache-dir -r requirements.txt
         systemctl restart pip-agent
         EOF

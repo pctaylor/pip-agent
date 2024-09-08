@@ -14,12 +14,13 @@ This project is designed to create a Language Learning Model (LLM)-based agent c
         - **[*TODO*] Agent-specific content** reminder to explore impact of content metadata and networked content.
 - **Web Interface:** A simple HTML/CSS/JS frontend that communicates with the backend via Flask.
     - **[*TODO*] Redesign** TBD but less shit. Better from visual & interactivity povs.
-    - **[*TODO*] Human-check** don't let bots use the site
+    - **[*TODO*] Human-check** don't let bots use the site (go beyond the current silly check)
 - **Hosting:** The application is deployed on a Digital Ocean droplet with proper configuration for production, including SSL via Nginx.
     - **Secret management** secrets are stored in `.env` file and ignored by git.
     - **[*IN-PROGRESS*] Deployment** is continuous, updating the page after each push to the main branch using Github Actions.
     - **[*TODO*] Monitoring** basic logging and monitoring.
 - **Security:** Basic security measures have been implemented, including HTTPS and input validation.
+- **[*TODO*] Measurement:** Store prompts, traffic, etc.
 
 ## Steps Completed
 
