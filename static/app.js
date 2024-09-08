@@ -27,7 +27,7 @@ function askAgent() {
         if (markdownContent) {
             // Highlight specific names
             const highlightedResponse = data.response.replace(
-                /(Pip|Phil|Philip|Phil Taylor)/gi,
+                /(Philip Taylor|Phil Taylor|Philip|Phil|Pip)/gi,
                 '<span class="highlight-name">$1</span>'
             );
             markdownContent.innerHTML = highlightedResponse;

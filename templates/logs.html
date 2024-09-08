@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+</head>
+<body>
+    <h1>Logs</h1>
+    
+    <h2>User Actions</h2>
+    <table>
+        <tr>
+            <th>Timestamp</th>
+            <th>Session ID</th>
+            <th>Action Type</th>
+            <th>Prompt</th>
+            <th>Response</th>
+            <th>Response Length</th>
+            <th>Response Time</th>
+        </tr>
+        {% for action in user_actions %}
+        <tr>
+            <td>{{ action.timestamp }}</td>
+            <td>{{ action.session_id }}</td>
+            <td>{{ action.action_type }}</td>
+            <td>{{ action.prompt }}</td>
+            <td>{{ action.response }}</td>
+            <td>{{ action.response_length }}</td>
+            <td>{{ action.response_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>API Calls</h2>
+    <table>
+        <tr>
+            <th>Timestamp</th>
+            <th>Endpoint</th>
+            <th>Request Payload</th>
+            <th>Response Status</th>
+            <th>Response Time</th>
+        </tr>
+        {% for call in api_calls %}
+        <tr>
+            <td>{{ call.timestamp }}</td>
+            <td>{{ call.endpoint }}</td>
+            <td>{{ call.request_payload }}</td>
+            <td>{{ call.response_status }}</td>
+            <td>{{ call.response_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Errors</h2>
+    <table>
+        <tr>
+            <th>Timestamp</th>
+            <th>Error Type</th>
+            <th>Error Message</th>
+            <th>Stack Trace</th>
+            <th>Session ID</th>
+        </tr>
+        {% for error in errors %}
+        <tr>
+            <td>{{ error.timestamp }}</td>
+            <td>{{ error.error_type }}</td>
+            <td>{{ error.error_message }}</td>
+            <td>{{ error.stack_trace }}</td>
+            <td>{{ error.session_id }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

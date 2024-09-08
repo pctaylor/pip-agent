@@ -246,6 +246,7 @@ footer {
     opacity: 0;
     transition: opacity 0.3s ease;
     font-size: 0.85em;
+    min-height: 100px;
     max-height: calc(100vh - 500px);
     overflow-y: auto;
     scrollbar-width: thin;
