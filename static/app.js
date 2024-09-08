@@ -1,17 +1,13 @@
 function askAgent() {
     const userPrompt = document.getElementById('userPrompt').value;
-    const responseElement = document.getElementById('response');
     const pipImage = document.getElementById('pip-image');
     const markdownContent = document.getElementById('markdown-content');
 
     // Show thinking animation
     pipImage.classList.add('thinking');
-    if (responseElement) {
-        responseElement.style.display = 'none';
-    }
     if (markdownContent) {
-        markdownContent.style.display = 'none';
-        markdownContent.style.opacity = '0';
+        markdownContent.innerHTML = ''; // Clear content instead of hiding
+        markdownContent.style.opacity = '0.5'; // Reduce opacity to indicate loading
     }
 
     fetch('/ask', {
@@ -27,8 +23,8 @@ function askAgent() {
         if (markdownContent) {
             // Highlight specific names
             const highlightedResponse = data.response.replace(
-                /(Philip Taylor|Phil Taylor|Philip|Phil|Pip)/gi,
-                '<span class="highlight-name">$1</span>'
+                /\b(Philip Taylor|Phil Taylor|Philip|Phil|Pip)('s)?\b/gi,
+                (match, name, possessive) => `<span class="highlight-name">${name}${possessive || ''}</span>`
             );
             markdownContent.innerHTML = highlightedResponse;
             markdownContent.style.display = 'block';

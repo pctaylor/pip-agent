@@ -36,7 +36,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
     background-color: var(--primary-color);
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -46,6 +46,7 @@ h1 {
     position: relative;
     overflow: hidden;
     max-height: calc(100vh - 40px);
+    justify-content: space-between;
 }
 
 @media (min-width: 1024px) {
@@ -235,24 +236,32 @@ footer {
     font-family: 'Roboto', sans-serif;
     color: var(--text-color);
     background-color: var(--secondary-color);
-    padding: 25px;
+    padding: 5px 25px;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 5px 0;
+    margin: 10px 0;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     text-align: left;
-    line-height: 1.6;
+    line-height: 1.1;
     position: relative;
     opacity: 0;
     transition: opacity 0.3s ease;
-    font-size: 1.1em;
+    font-size: 0.95em;
     min-height: 100px;
-    max-height: calc(100vh - 250px);
+    max-height: calc(100vh - 450px);
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #888 transparent;
+    overscroll-behavior: contain;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#markdown-content::before,
+#markdown-content::after {
+    content: '';
+    display: block;
+    height: 10px;
 }
 
 #markdown-content::before {
@@ -290,13 +299,13 @@ footer {
 #markdown-content .h6-style { font-size: 1em; }
 
 #markdown-content .paragraph-style {
-    margin-bottom: 1em;
+    margin-bottom: 0.8em;
 }
 
 #markdown-content .unordered-list-style,
 #markdown-content .ordered-list-style {
-    margin-left: 2em;
-    margin-bottom: 1em;
+    margin-left: 1.5em;
+    margin-bottom: 0.8em;
 }
 
 #markdown-content .blockquote-style {
@@ -327,7 +336,7 @@ footer {
 
 @media (max-width: 600px) {
     #markdown-content {
-        font-size: 0.9em;
+        font-size: 0.85em;
     }
 }
 

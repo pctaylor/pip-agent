@@ -47,7 +47,7 @@ def query_openai(prompt, system_content, previous_interaction=None):
         messages.append({"role": "user", "content": prompt})
 
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=messages
         )
         return response.choices[0].message.content
