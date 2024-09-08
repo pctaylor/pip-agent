@@ -40,8 +40,9 @@ jobs:
         sudo cp .env /etc/environment
         sudo systemctl daemon-reload
         sudo systemctl restart pip-agent
+        sleep 5
+        sudo journalctl -u pip-agent -n 50 --no-pager
         # Health check
-        sleep 30
         if curl -f http://localhost:8000; then
           echo "Deployment successful"
         else
