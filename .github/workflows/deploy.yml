@@ -31,18 +31,20 @@ jobs:
         sudo apt install -y python3 python3-venv python3-pip pipx
         export PATH=$PATH:/root/.local/bin
         cd /var/www/pip-agent
-        git pull origin main
+        git fetch origin main
+        git reset --hard origin/main
         rm -rf venv
         python3 -m venv venv
         source venv/bin/activate
         pip install --no-cache-dir -r requirements.txt
-        systemctl restart pip-agent
+        sudo systemctl restart pip-agent
         # Health check
-        sleep 10
+        sleep 30
         if curl -f http://localhost:5000; then
           echo "Deployment successful"
         else
           echo "Deployment failed"
+          sudo systemctl status pip-agent
           exit 1
         fi
         EOF
