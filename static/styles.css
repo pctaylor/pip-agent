@@ -26,8 +26,8 @@ body {
 h1 {
     font-family: 'Caveat', cursive;
     font-size: 4.5em;
-    margin: 0 0 20px;
     color: var(--accent-color);
+    margin: 0;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -36,16 +36,16 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px;
+    padding: 20px;
     background-color: var(--primary-color);
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 1000px;
-    margin: 20px auto;
+    width: 95%;
+    max-width: 1200px;
+    margin: 10px auto;
     position: relative;
     overflow: hidden;
-    max-height: 100vh;
+    max-height: calc(100vh - 40px);
 }
 
 @media (min-width: 1024px) {
@@ -150,15 +150,15 @@ footer {
 }
 
 #pip-image {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     max-width: 100%;
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
     border: 5px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
     transition: transform 0.3s ease;
 }
 
@@ -176,35 +176,37 @@ footer {
     animation: thinking 1s infinite;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     #app {
-        padding: 20px;
+        padding: 15px;
+        width: 98%;
     }
 
     h1 {
-        font-size: 2.5em;
+        font-size: 3em;
     }
 
     input[type="text"], button {
         font-size: 0.9em;
     }
 
-    #response {
+    #markdown-content {
         font-size: 0.9em;
+        max-height: calc(100vh - 250px);
     }
 }
 
 @media (min-width: 768px) {
     #pip-image {
-        width: 250px;
-        height: 250px;
+        width: 220px;
+        height: 220px;
     }
 }
 
 @media (min-width: 1024px) {
     #pip-image {
-        width: 300px;
-        height: 300px;
+        width: 250px;
+        height: 250px;
     }
 }
 
@@ -233,25 +235,24 @@ footer {
     font-family: 'Roboto', sans-serif;
     color: var(--text-color);
     background-color: var(--secondary-color);
-    padding: 20px;
+    padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 5px 0;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     text-align: left;
-    line-height: 1.4;
+    line-height: 1.6;
     position: relative;
     opacity: 0;
     transition: opacity 0.3s ease;
-    font-size: 0.85em;
+    font-size: 1.1em;
     min-height: 100px;
-    max-height: calc(100vh - 500px);
+    max-height: calc(100vh - 250px);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
-    padding-right: 15px;
 }
 
 #markdown-content::before {

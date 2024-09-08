@@ -9,6 +9,7 @@ from models import Session, UserSession, UserAction, APICall, ErrorLog
 from sqlalchemy import func
 import os
 from dotenv import load_dotenv
+import traceback
 
 load_dotenv()
 
@@ -20,6 +21,13 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 db_handler = DatabaseLogger()
 logger.addHandler(db_handler)
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # Log the error and stacktrace
+    app.logger.error('An error occurred: %s', str(e))
+    app.logger.error(traceback.format_exc())
+    return jsonify(error=str(e)), 500
 
 @app.before_request
 def before_request():
@@ -38,21 +46,29 @@ def before_request():
 
 @app.route('/', methods=['GET'])
 def index():
-    logger.info("Accessing index page", extra={'action_type': 'page_view', 'session_id': session['session_id']})
-    return render_template('index.html')
+    try:
+        logger.info("Accessing index page", extra={'action_type': 'page_view', 'session_id': session['session_id']})
+        return render_template('index.html')
+    except Exception as e:
+        app.logger.error('Error in index route: %s', str(e))
+        app.logger.error(traceback.format_exc())
+        return jsonify(error=str(e)), 500
 
 @app.route('/ask', methods=['POST'])
 def ask_agent():
     start_time = datetime.now(timezone.utc)
     data = request.json
     prompt = data.get("prompt")
+    previous_interaction = session.get('previous_interaction')
     
     try:
         if "weather in" in prompt.lower():
             city_name = prompt.split("in", 1)[1].strip()
             response = get_weather(city_name)
         else:
-            response = query_openai(prompt)
+            with open('prompts/system_instructions.md', 'r') as file:
+                system_content = file.read()
+            response = query_openai(prompt, system_content, previous_interaction)
         
         end_time = datetime.now(timezone.utc)
         response_time = (end_time - start_time).total_seconds()
@@ -71,6 +87,12 @@ def ask_agent():
                 'response_time': response_time
             }
         )
+        
+        # Store the current interaction for the next round
+        session['previous_interaction'] = {
+            "prompt": prompt,
+            "response": response
+        }
         
         cleaned_html = clean_markdown(response)
         return jsonify({"response": cleaned_html})

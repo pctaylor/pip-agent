@@ -93,4 +93,14 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.innerHTML = '<h1>Humans only</h1>';
         });
     }
+
+    const userPromptInput = document.getElementById('userPrompt');
+    if (userPromptInput) {
+        userPromptInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                askAgent();
+            }
+        });
+    }
 });
