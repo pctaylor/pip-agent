@@ -37,10 +37,12 @@ jobs:
         python3 -m venv venv
         source venv/bin/activate
         pip install --no-cache-dir -r requirements.txt
+        sudo cp .env /etc/environment
+        sudo systemctl daemon-reload
         sudo systemctl restart pip-agent
         # Health check
         sleep 30
-        if curl -f http://localhost:5000; then
+        if curl -f http://localhost:8000; then
           echo "Deployment successful"
         else
           echo "Deployment failed"
